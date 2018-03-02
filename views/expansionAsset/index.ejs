@@ -1,0 +1,602 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>资产扩容</title>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/jquery-form.js"></script>
+    <link href="/css/bootstrap/bootstrap.css" rel="stylesheet">
+    <script src="/js/bootstrap/bootstrap.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script language=javascript>
+        $(function(){
+            $("#tabadd").addClass("hideobj");
+
+        });
+        function checkaccount(){
+            // return false;
+            var rzje=$("#rzje").val();
+            var mcfe=$("#mcfe").val();
+            var zcmclist = $("#zcmclist").val();
+            var checklist = $("span[id$='Check_label']").text();
+            var falg = false;
+            $('.paynum').each(function(){
+                var inputqbdz = $(this).parent().parent().find("input[name='address']").val();
+                var inputfpbl  =$(this).val()
+                if((inputqbdz==""&&inputfpbl!="")||(inputqbdz!=""&&inputfpbl=="")){
+                    falg = true;
+                    return false;
+                }
+            });
+            if(checklist!=""){
+                alert(checklist);
+                return false;
+            }else if(rzje==""){
+                alert("请完整填写信息!");
+                return false;
+            }else if(zcmclist==""||zcmclist==null){
+                var check = $("#mclistCheck_label");
+                check.html( "资产名称为空!");
+                check.css({color:"red"});
+                return false;
+            }else if(falg){
+                var check = $("#krfefpCheck_label");
+                check.html( "请填写完整的钱包地址和分配比例!");
+                check.css({color:"red"});
+                return false;
+            }
+            $("#submit").attr("disabled","disabled");
+            return true;
+        }
+        function checkRegisterInfo(num,obj){
+            var text = $(obj).val().trim();
+            var check = $(obj).parent().children('span').eq(1);
+            check.html( "");
+            var check1 = $('#krfefpCheck_label')
+            var inputname = $(obj).parent().children().text();
+
+            var zczfe  =$('#zczfe').val();
+            var krfe = $('#krfe').val();
+
+            var sum = 0;
+            $('.paynum').each(function(){
+                var inputqbdz = $(this).parent().parent().find("input[name='qbdz']").val();
+                if($(this).val()!=""&&inputqbdz!=""){
+                    var num =parseInt($(this).val().trim());
+                    sum += num
+                }
+
+            });
+            var inputId =  $(obj).attr("id");
+            var fpbili =(parseInt(krfe)-sum)/parseInt(zczfe);
+
+            switch (num) {
+                    //当点击提交按钮时校验必填项是否为空,防止直接点击提交按钮
+                case 0:
+
+                    //验证资产名称
+                case 1:
+                    if (text == "") {
+                        check.html(inputname+"不能为空!");
+                        check.css({color:"red"});
+
+                    } else if(text.search(/^[0-9]+([.]{1}[0-9]+){0,1}$/) == -1){
+                        check.css({color:"red"});
+                        check.html("请输入规范的"+inputname+"!");
+                    }else{
+                        if(inputId=="krfe"){
+                            $('#textfield2').val(fpbili.toFixed(4));
+                            $('#textfield3').val(fpbili);
+                        }
+
+                        check.html( "");
+                    }
+                    break;
+
+                case 2:
+                    if (text == "") {
+                        check1.html("分配份额不能为空!");
+                        check1.css({color:"red"});
+
+                    } else if(text.search(/^[0-9]+([.]{1}[0-9]+){0,1}$/) == -1){
+                        check1.css({color:"red"});
+                        check1.html("请输入规范的分配份额!");
+                    }else if(sum>parseInt(krfe==""?0:krfe)){
+                        check1.css({color:"red"});
+                        check1.html("分配份额不能大于扩容份额   !");
+                    }else{
+                        $('#textfield2').val(fpbili.toFixed(4));
+                        $('#textfield3').val(fpbili);
+                        check1.html( "");
+                    }
+                    break;
+                case 3:
+                    var qbdz = [];
+                    $('.qbdz').each(function(){
+                        if($(this).val()!=""){
+                            var num =$(this).val().trim();
+                            qbdz.push(num);
+                        }
+
+                    });
+
+                    var falg =0;
+                    for(var i in qbdz){
+
+                        if(text===qbdz[i]){
+                            falg++;
+                        }
+                    }
+
+                    if (text == "") {
+                        check1.html("钱包地址不能为空!");
+                        check1.css({color:"red"});
+
+                    } else if (text.search(/^r[1-9A-HJ-NP-Za-km-z]{25,34}$/)) {
+                        check.html( "请输入规范的钱包地址!");
+                        check.css({color:"red"});
+                    }else if(text.length>34){
+                        check1.css({color:"red"});
+                        check1.html("请输入规范的钱包地址!");
+                    }else if(falg!=1){
+                        check1.css({color:"red"});
+                        check1.html("该钱包地址已经存在!");
+
+                    }else if(sum>parseInt(krfe==""?0:krfe)){
+                        check1.css({color:"red"});
+                        check1.html("分配份额不能大于扩容份额   !");
+                    }else{
+                        $('#textfield2').val(fpbili.toFixed(4));
+                        $('#textfield3').val(fpbili);
+                        check1.html( "");
+                    }
+                    break;
+
+
+            }
+        }
+        function tijiaodengdai(result){
+            setTimeout(function() {
+                if (result == "资产扩容完成") {
+                    $('#imgchange').attr("src", "/img/zhengque.png");
+                    $('#textchange').text("资产扩容完成");
+                    $('#tjtext').text("提交成功，我们将在两个工作日内对提交内容进行审核。您可以在审核中查看提交.");
+                    $('#button').removeAttr("disabled");
+                    $('#button').val("资产扩容完成");
+                } else {
+                    $('#imgchange').attr("src", "/img/cuowu.png");
+                    $('#textchange').text("资产扩容失败");
+                    $('#tjtext').text("提交失败，请查看数据是否填写正确，重新填写正确数据。");
+                    $('#button').val("资产扩容失败");
+                    $('#button').removeAttr("disabled");
+                }
+            },1000);
+        };
+        $('#form1').ajaxForm(function(result){
+            $('#myModal').modal('show');
+            tijiaodengdai(result);
+        })
+
+        function okey(){
+            var values = $('#button').val();
+            if(values=="资产扩容完成"){
+                window.location.href="index"
+            }else{
+                $('#imgchange').attr("src","/img/jiazaizhong-063.gif");
+                $('#textchange').text("正在提交...");
+                $('#tjtext').text("数据正在提交，请耐心等待。");
+                $('#submit').removeAttr("disabled");
+            }
+        }
+
+        function add(){
+            window.parent.iFrameHeight();
+            $("#tableclone").append($("#tabadd").clone(true).attr("id",'clonetabadd').removeClass("hideobj"));
+        }
+        function cut(obj){
+
+            window.parent.iFrameHeight();
+            var tablelength =$("#tableclone table").length;
+            var node=$(obj).parent().parent().parent().parent();
+            node.remove();
+
+            var zczfe  =$('#zczfe').val();
+            var krfe = $('#krfe').val();
+            var sum = 0;
+            $('.paynum').each(function(){
+                var inputqbdz = $(this).parent().parent().find("input[name='qbdz']").val();
+                if($(this).val()!=""&&inputqbdz!=""){
+                    var num =parseInt($(this).val().trim());
+                    sum += num
+                }
+
+            });
+            var fpbili =(parseInt(krfe)-sum)/parseInt(zczfe);
+            $('#textfield2').val(fpbili.toFixed(4));
+            $('#textfield3').val(fpbili);
+
+        }
+    </script>
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+            background-color: #CCE5EC;
+        }
+        .bd {
+            height: 40px;
+            width: 75%;
+            border: 1px solid #CCC;
+            min-width: 530px;
+            color: #666;
+            text-indent: 3mm;
+            background-color: #eef7fa;
+            margin-top: 10px;
+        }
+        .div_bd {
+            width: auto;
+            margin-bottom: 18px;
+            text-align: left;
+            margin-left: 20%;
+        }
+        .div_bd2 {
+            width: auto;
+            margin-bottom: 18px;
+            text-align: left;
+            margin-left: 20%;
+            background-color: #cce4ec;
+            height: auto;
+            margin-right: 20%;
+            min-width: 530px;
+        }
+        #div1 #div3 {
+            height: auto;
+            margin-top: 50px;
+            border-bottom-width: 0px;
+            border-bottom-style: ridge;
+            border-bottom-color: #c8e1e6;
+            margin-bottom: 40px;
+        }
+        .div_yema {
+            margin-top: 36px;
+            margin-right: auto;
+            margin-left: auto;
+            height: 100px;
+        }
+        .bdfh {
+            height: 40px;
+            width: 100%;
+            border: 1px solid #CCC;
+        }
+        button {
+            height: 43px;
+            width: 142px;
+            background-color: #69c9ec;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            border-radius: 5px;
+        }
+        button:hover{
+            background-color: #9adaf1;cursor:pointer;
+        }
+        .an_ym {
+            background-color: #a9c5d0;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            border-radius: 3px;
+            height: 22px;
+        }
+        .an_ym:hover{
+            background-color: #6ac8ec;cursor:pointer;
+        }
+        .font4 {
+            font-family: "微软雅黑";
+            font-size: 18px;
+            color: #ed7c65;
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+        }
+        .an1 {
+            background-color: #69c9ec;
+            height: 43px;
+            width: 180px;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            border-radius: 5px;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+        }
+        .an1:hover{background-color:#91d7f0;
+            cursor:pointer;}
+        .font3 {
+            font-family: "微软雅黑";
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3d5b;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+        }
+        #div1 #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: auto;
+            background-color: #ddeef4;
+
+        }
+
+        #div1 #div3 #an_tj {
+            margin-right: auto;
+            margin-left: auto;
+            width: 180px;
+            height: 120px;
+            margin-top: 50px;
+        }
+        #fefp1 {
+            height: 35px;
+            width: 100%;
+            background-color: #EEF7FA;
+            border: 1px solid #ccc;
+            color: #999;
+            text-indent: 3mm;
+        }
+        .qbdz{
+            height: 35px;
+            width: 90%;
+            background-color: #EEF7FA;
+            border: 1px solid #ccc;
+            color: #999;
+            text-indent: 3mm;
+        }
+        #fefp2 {
+            height: 35px;
+            width: 100%;
+            background-color: #EEF7FA;
+            border: 1px solid #ccc;
+            text-indent: 3mm;
+            color: #999;
+        }
+        .fpbd {
+            height: 35px;
+            width: auto;
+            border: 1px solid #CCC;
+            background-color: #EEF7FA;
+            text-indent: 3mm;
+        }
+        .tjan:hover {filter: alpha(opacity=50);-moz-opacity:.5;-khtml-opacity:.5;opacity:.5;cursor:pointer;}
+        .hideobj{display: none}
+
+    </style>
+</head>
+
+<body>
+<div id="div1">
+    <div id="div2" style="margin-top: 20px"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                <td bgcolor="#c2e1eb" class="font1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资产扩容</td>
+                <td width="52" bgcolor="#c2e1eb"><img src="/img/kr.png" width="51" height="42" /></td>
+            </tr>
+        </table>
+
+    </div>
+    <script>
+
+        function selection(value){
+            var json = JSON.parse($('#test').text());
+            for(var i =0;i<json.length;i++){
+                var jsonobj = json[i];
+                if(jsonobj['address'] == value) {
+                    $('#zczfe').val(jsonobj['allAssets']);
+                    $('#currency').val(jsonobj['code']);
+                    //alert(jsonobj['value']);
+                }
+            }
+        }
+
+    </script>
+    <div id="div3">
+        <form id="form1" action="index" method="post" onsubmit="return checkaccount()">
+            <div class="div_bd" id="div_lc"><span class="font2" >资产代码/资产名称*</span>&nbsp&nbsp<span id="zcmclistCheck_label" style="font-size: 14px;"></span>
+                <br style="line-height:12px" />
+                <label for="cslc"></label>
+                <div id="test" style="display: none"><%=JSON.stringify(assets)%></div>
+                <select name="counterparty" class="bd" id="zcmclist" onchange="selection(this.value);" >
+                    <% assets.forEach(function (asset) { %>
+                    <option value="<%=asset.address%>">&nbsp;&nbsp;<%=asset.code%>&nbsp;&nbsp;<%=asset.name%></option>
+                    <%})%>
+                </select>
+
+            </div>
+            <% if(assets[0]){%>
+            <div class="div_bd" id="div_dm"><span class="font2">资产总份额</span>&nbsp&nbsp<span id="rzjeCheck_label" style="font-size: 14px;"></span>
+                <br style="line-height:12px" />
+
+                <label for="zczfe"></label>
+                <input name="allAssets" type="text" class="bd" id="zczfe" placeholder="元"  value = "<%=assets[0].allAssets%>"readonly="readonly"/>
+                <input type="text" name="currency" id="currency" value="<%=assets[0].code%>" style="display:none">
+                <input type="text" name="currencyName" id="currency" value="<%=assets[0].name%>" style="display:none">
+            </div>
+            <%}else{%>
+            <div class="div_bd" id="div_dm"><span class="font2">资产总份额</span>&nbsp&nbsp<span id="rzjeCheck_label" style="font-size: 14px;"></span>
+                <br style="line-height:12px" />
+
+                <label for="zczfe"></label>
+                <input name="allAssets" type="text" class="bd" id="zczfe" placeholder="元" value="" readonly="readonly"/>
+                <input type="text" name="currency" id="currency" value="" style="display:none">
+                <input type="text" name="currencyName" id="currency" value="" style="display:none">
+            </div>
+            <%}%>
+            <div class="div_bd" id="div_dm"><span class="font2">融资金额</span>&nbsp&nbsp<span id="rzjeCheck_label" style="font-size: 14px;"></span>
+                <br style="line-height:12px" />
+
+                <label for="rzje"></label>
+                <input type="text" name="money" class="bd" id="rzje" placeholder="元" value="" onblur="checkRegisterInfo(1,this)" />
+            </div>
+            <div class="div_bd" id="div_fe"><span class="font2" >每份扩容后价格</span>&nbsp&nbsp<span id="krhjgCheck_label" style="font-size: 14px;"></span>
+                <br style="line-height:12px" />
+
+                <label for="krhjg"></label>
+                <input name="price" type="text" class="bd" id="krhjg" placeholder="众享币" value="" onblur="checkRegisterInfo(1,this)" />
+            </div>
+            <div class="div_bd" id="div_fe"><span class="font2" >扩容份额</span>&nbsp&nbsp<span id="krfeCheck_label" style="font-size: 14px;"></span>
+                <br style="line-height:12px" />
+
+                <label for="krfe"></label>
+                <input name="addAssets" type="text" class="bd" id="krfe" placeholder="份" value="" onblur="checkRegisterInfo(1,this)" />
+            </div>
+            <div class="div_bd2" id="div_fpfe">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0" style=" background-color:#ddeef4" >
+                    <tr>
+                        <td height="30" valign="top"><span class="font2">扩容份额分配*</span>&nbsp&nbsp<span id="krfefpCheck_label" style="font-size: 14px;"></span></td>
+                    </tr>
+                </table>
+                <div id="tableclone">
+                    <table width="97%" border="0" id="tabadd"  cellpadding="0" cellspacing="0" style=" margin-left:15px;margin-top:12px;" >
+                        <tr>
+                            <td width="120">
+                                <label for="paynum"></label>
+                                <input name="asset" class="paynum" type="text" id="fefp1" placeholder="份" value="" onblur="checkRegisterInfo(2,this)" />
+                            </td>
+                            <td width="60" align="center" class="font2">分配给</td>
+                            <td>
+                                <label for="qbdz"></label>
+                                <input name="address" class="qbdz" type="text" id="qbdz" placeholder="钱包地址" value="" onblur="checkRegisterInfo(3,this)" list="url_list1" autocomplete="off"/>
+                                <datalist id="url_list1">
+                                    <%for(var it in friends){%>
+                                    <option label="<%=friends[it]%>" value="<%=it%>"/>
+                                    <%}%>
+                                </datalist>
+                            </td>
+                            <td align="center">
+                                <img src="/img/jh.png" width="23" height="23" class="tjan"  onclick="cut(this)"/>
+                            </td>
+                        </tr>
+                    </table>
+                    <table width="97%" border="0" id="tabadds" cellpadding="0" cellspacing="0" style=" margin-left:15px;margin-top:25px" >
+                        <tr>
+                            <td width="120">
+                                <label for="paynum"></label>
+                                <input name="asset"  class="paynum" type="text" id="fefp1" placeholder="份" onblur="checkRegisterInfo(2,this)" />
+                            </td>
+                            <td width="60" align="center" class="font2">分配给</td>
+                            <td>
+                                <label for="qbdz"></label>
+                                <input name="address"class="qbdz"  type="text" id="qbdz" placeholder="钱包地址" value="" onblur="checkRegisterInfo(3,this)" list="url_list2" autocomplete="off"/>
+                                <datalist id="url_list2">
+                                    <%for(var it in friends){%>
+                                    <% console.log(it) %>
+                                    <option label="<%=friends[it]%>" value="<%=it%>"/>
+                                    <%}%>
+                                </datalist>
+                            </td>
+                            <td align="center"><img src="/img/jia.png" width="23" height="23" class="tjan" onclick="add()" /></td>
+                        </tr>
+                    </table>
+
+                </div>
+
+                <table width="97%" border="0" cellpadding="0" cellspacing="0" style=" margin-left:15px;margin-top:20px" >
+                    <tr>
+                        <td width="120" class="font2">剩余部分分配比例</td>
+                        <td width="150" align="left" valign="middle" class="font2">
+                            <label for="basenum"></label>
+                            <input name="basenum" type="text" class="fpbd"  readonly="readonly" value="1" id="textfield" />
+                        </td>
+                        <td width="50" align="center" class="font2">配</td>
+                        <td align="left">
+                            <label for="expansionnum"></label>
+                            <input type="text" class="fpbd"  readonly="readonly" value="" id="textfield2" />
+                            <input name="rate" type="text" class="fpbd"  style="display: none" readonly="readonly" value="" id="textfield3" />
+                        </td>
+                    </tr>
+                </table>
+                <br />
+                <br />
+            </div>
+
+            <div class="div_bd" id="div_lc"><span class="font2" >扩容轮次*</span>
+                <br style="line-height:12px" />
+
+                <label for="krlc"></label>
+                <select name="krlc" class="bd" id="krlc">
+                    <!--<option >&nbsp;&nbsp;无</option>-->
+                    <option >&nbsp;&nbsp;天使轮</option>
+                    <option >&nbsp;&nbsp;A轮</option>
+                </select>
+
+            </div>
+            <%if(msg){%>
+            <div class="div_bd" id="div_dm">
+                <span class="font2" style="color: red"><%=msg%></span>
+            </div>
+            <%}%>
+            <div id="an_tj">
+                <input type="submit" id="submit" class="an1" value="提&nbsp;&nbsp;交" />
+            </div>
+        </form>
+        <!--模态框（Modal）-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-show="false"
+             aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 10%">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <table width="100%">
+                                <tr>
+                                    <td width="40%" align="right" style="padding-right: 20px">
+                                        <img id="imgchange" src="/img/jiazaizhong-063.gif" style="width: 50px;height: 50px" alt=""/>
+                                    </td>
+                                    <td id="textchange" width="60%" align="left" class="font3">正在提交...</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="padding-left:50px">
+                            <p >
+                                <span id="tjtext" class="font2">数据正在提交，请耐心等待。</span>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="button" type="button" class="btn btn-primary" data-dismiss="modal" onclick="okey()" disabled="true">
+                                确定
+                            </button>
+                        </div>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

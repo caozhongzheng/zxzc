@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+
+        }
+        #div1 #div3 {
+            height: auto;
+            margin-top: 50px;
+        }
+
+        .font4 {
+            font-family: "微软雅黑";
+            font-size: 18px;
+            color: #ed7c65;
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+        }
+        .font3 {
+            font-family: "微软雅黑";
+            font-size: 20px;
+            font-weight: bold;
+            color: #2d3d5b;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: bold;
+            color: #2d3d5b;
+        }
+        #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: 100%;
+            overflow:hidden;
+            background-color: #ddeef4;
+
+        }
+        .div4 {
+            width:40%;
+            height: 255px;
+            float: left;
+            border-right-width: 1px;
+            border-bottom-width: 1px;
+            border-left-width: 1px;
+            border-top-style: solid;
+            border-right-style: solid;
+            border-bottom-style: solid;
+            border-left-style: solid;
+            border-top-color: #ed7c65;
+            border-right-color: #c2e1eb;
+            border-bottom-color: #c2e1eb;
+            border-left-color: #c2e1eb;
+            background-color: #FFF;
+            margin-left: 7%;
+            margin-bottom: 2%;
+        }
+        .div5 {
+            width: 100%;
+            text-align: center;
+            font-family: "微软雅黑";
+            font-size: 15px;
+            font-weight: bold;
+            height: 32px;
+            top: 30px;
+            margin-top: 20px;
+        }
+        .div7 {
+            width: 60%;
+            border: 3px solid #69C9EC;
+            text-align: center;
+            height: 80px;
+
+            margin-right: 15px;
+        }
+        #sousuo {
+            height: 28px;
+            width: 250px;
+            background-color: #DDEEF4;
+            border-radius: 15px 15px 15px 15px;
+            border: 1px solid #7ec0c1;
+            text-indent: 3mm;
+        }
+        #anss:hover { cursor:pointer;
+        }
+        #anss:active {filter: alpha(opacity=50);
+            -moz-opacity:.5;
+            -khtml-opacity:.5;opacity:.5;}
+    </style>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script >
+        function find(){
+            var findQuery = $('#findQuery').val();
+            window.location.href = "/market/index?currency="+findQuery;
+            $(".code").parent().show();
+            var value = $('#sousuo').val().trim();
+            if(value!=""){
+                $('.code').each(function(){
+                    if($(this).val()!=value){
+                        $((this)).parent().hide();
+                    }
+                });
+            }
+        }
+        $(function(){
+            $("#sousuo").keydown(function(e){
+                var e = e || event,
+                        keycode = e.which || e.keyCode;
+                if (keycode==13) {
+                    find();
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div id="div1">
+    <div id="div2" style="margin-top: 20px"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                <td width="195" bgcolor="#c2e1eb" class="font1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;交易市场</td>
+                <td width="717" align="right" valign="middle" bgcolor="#c2e1eb"><div style="float:right; margin-right:30px">
+                        <input type="text" id="findQuery" name="sousuo" placeholder="请输入资产代码" id="sousuo" />
+                        <div style="float:right">
+                            <img src="/img/ss2.png" name="anss" width="28" height="32" onclick="find()" id="anss" />
+                        </div>
+                    </div>
+                </td>
+                <td width="52" bgcolor="#c2e1eb"><img src="/img/zyan.png" width="51" height="42" /></td>
+            </tr>
+        </table>
+    </div>
+    <div id="div3">
+        <% results.forEach(function (result) { %>
+        <div class="div4" id="div4" onclick='dealassetDetail(this)'>
+            <input  style="display:none" value='<%=result.counterparty%>;<%=result.currency%>'/>
+            <input  style="display:none" class="code" value='<%=result.currency%>'/>
+            <!-- <span name="address" style="display:none"></span> -->
+            <div class="div5" id="div5">
+                <table border="0"  style="margin-left:auto; margin-right:auto">
+                    <tr>
+                        <td><img src="/img/fh1.png" width="32" height="32" /></td>
+                        <td ><%=result.currency%></td>
+                        <td> <%=result.name%></td>
+                    </tr>
+                </table>
+            </div>
+            <div id="div6" style="margin-top:25px">
+                <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td width="50%" align="right">
+                            <div class="div7" id="div7">
+                                <span class="font3"><%=result.price.toFixed(2)%></span><br />
+                                <span class="font2">众享币/份</span><br/>
+                                <span class="font1" >最新价格</span>
+                            </div>
+                            <!--<div class="font1" id="div8" style="margin-right:25%">最新价格</div></td>-->
+                        <td width="5%"><img src="/img/xx_5.png" width="1" height="126" /></td>
+                        <td width="40%" align="left" valign="middle" style=" line-height:40px"><span class="font1">买单:<%=result.buysum.toFixed(2)%><br />
+            卖单:<%=result.sellsum.toFixed(2)%></span><br /></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <%})%>
+    </div>
+
+</div>
+<script type="text/javascript">
+
+    function dealassetDetail(aa){
+        console.log(aa)
+        var info= $(aa).children().first().val();
+        window.location.href='/market/index?info='+info;
+    }
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap-theme.min.css">
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/bootstrap/bootstrap.min.js"></script>
+    <script src="js/angular.js"></script>
+    <script src="js/ajaxfileupload.js"></script>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+        .file-box{ position:relative;width:400px}
+        .txt{ height:30px; border:1px solid #cdcdcd; width:360px;}
+        .btn{ background-color:#FFF; border:1px solid #CDCDCD;height:60px; width:70px;}
+        .file{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<script type="text/javascript">
+    function show_return()
+    {
+        window.location.href='login';
+
+    }
+    function login_submit()
+    {
+        window.location.href='index';
+    }
+    function register()
+    {
+        window.location.href='register';
+    }
+</script>
+
+<script type="text/javascript">
+    function ajaxFileUpload(){
+        //loading();//动态加载小图标
+        var pass= $("#password").val();
+        $.ajaxFileUpload ({
+            url :'/upload?pass='+pass,
+            secureuri :false,
+            fileElementId :'fileToUpload',
+            dataType : 'json',
+            success : function (data, status){
+                if(typeof(data.error) != 'undefined'){
+                    if(data.error != ''){
+                        alert(data.error);
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            },
+            error: function (data, status, e){
+                alert(e);
+            }
+        })
+        return false;
+    }
+    function loading (){
+        $("#loading ").ajaxStart(function(){
+            $(this).show();
+        }).ajaxComplete(function(){
+            $(this).hide();
+        });
+    }
+</script>
+
+
+<body>
+<div class="container-fluid top">
+    <div class="logoImg"><img src="img/logo_0.png" class="imgDiv"></div>
+    <div class="welcomeDiv">
+        <img src="img/welcome-to-peersafe-asset-management-platform.png" class="welcomeImg">
+    </div>
+</div>
+
+<div class="fromLoginDiv" style="margin-right: auto;margin-left: auto;margin-top: 20px">
+
+            <div class="radioDiv">
+                <a href="#" onclick="register()" class="registerUser">注册新用户</a>
+            <hr>
+            </div>
+        <div class="loginDiv">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <div class="file-box" style="margin-left:20px">
+                    <input type="file" name="file" multiple>
+                </div>
+                <div class="loginPswdDiv">
+                    <input type="password" class="form-control" id="password" name="password" placeholder='登录密码'>
+                </div>
+                <div  class="loginBtnDiv">
+                    <a href="login" onclick="show_return()"><img src="img/fanhui_53.png"> 返回</a>
+                    <input type="submit"  class="btn" value="登录" width="100px" height="35px"/>
+                </div>
+            </form>
+        </div>
+
+</div>
+
+</body>
+
+</html>

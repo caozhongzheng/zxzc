@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="chrome=IE8">
+<!-- <script src="js/fishcomponent.js"></script> -->
+<script src="/js/pie.js"></script>
+<title>My Demo 1</title>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+  <script>
+  function emp(oInput){
+      if(oInput.eflag!=true){
+          oInput.value="";
+          oInput.eflag=true;
+      }
+  }
+  window.onload = function() {
+    var canvas = document.getElementById("pie_canvas");
+    var result = '<%=result%>';
+    result = result.split('&#34;').join('"')
+    console.log(result)
+    var seriesData = JSON.parse(result);
+    var config = {
+        width : 600, 
+        height: 400,
+        series: seriesData,
+        canvas: canvas,
+        unit: "kg",
+        title:"",
+        tooltips : {
+          enable : true
+        },
+        animation :{
+          enable: true
+        },
+          legend : {
+            enable : true
+          },
+          text : {
+            enable: true
+          },
+    };
+    pieChart.initSettings(config);
+    pieChart.render();
+  }
+  </script>
+</head>
+<body>
+
+<div id="my_container" style="width:600px; height:500px; margin-left:130px;margin-top:15px">
+  <canvas id="pie_canvas"></canvas>
+</div>
+<hr / style="margin-top:-60px;width:600px;margin-left:130px">
+<div style="margin-left:350px">
+  <a href="table?name=<%=name%>&address=<%=address%>" style="text-decoration:none;">查看详情页表单</a>
+</div>
+</body>
+</html>

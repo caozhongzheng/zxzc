@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+
+        }
+        .an1 {
+            background-color: #69c9ec;
+            height: 43px;
+            width: 180px;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            border-radius: 5px;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            margin-top: 40px;
+            margin-left: 20%;
+        }
+        .an1:hover{background-color:#91d7f0;
+            cursor:pointer;}
+        #div1 #div3 {
+            background-color: #ddeef4;
+            height: 430px;
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+            line-height: 20px;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #fff;
+            float: right;
+            margin-top: 11px;
+            margin-right: 23px;
+        }
+
+        .font5 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: bold;
+            color: #2D3D5B;
+        }
+        #div1 #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: auto;
+            background-color: #ddeef4;
+            height: 30px;
+        }
+
+
+        #div1 #zuo {
+            width: 30%;
+            float: left;
+            margin-left: 5%;
+        }
+        #div1 #zuo #tou {
+            margin-top: 50px;
+            margin-left: 20%;
+            font-family: "微软雅黑";
+            font-size: 16px;
+            font-weight: bold;
+        }
+        #div1 #zuo #jiage {
+            height: 77px;
+            width: 90px;
+            text-align: center;
+            margin-top: 30px;
+            border: 2px solid #C2E1EB;
+            float: left;
+            margin-left: 15%;
+        }
+        .font_jg {
+            font-family: "微软雅黑";
+            font-size: 36px;
+            font-weight: bold;
+        }
+        #div1 #zuo #maidan {
+            float: left;
+            margin-top: 45px;
+            margin-left: 8%;
+        }
+        #div1 #zhong {
+            width: 2px;
+            float: left;
+            border-left-width: 1px;
+            border-left-style: dashed;
+            border-left-color: #C2E1EB;
+            height: 300px;
+            margin-top: 50px;
+            margin-left: 10px;
+        }
+        #div1 #you {
+            float: right;
+            width: 65%;
+            margin-top: -310px;
+        }
+        li {
+            text-decoration: none;
+            display: inline;
+        }
+        #div1 #you #dw {
+            width: 30%;
+            float: left;
+            text-align: center;
+        }
+        #div1 #you ul #jg {
+            float: left;
+            width: 30%;
+        }
+        #div1 #you ul #fs {
+            float: left;
+            width: 40%;
+            margin-bottom: 20px;
+        }
+
+        #div3 {
+            height: 400px;
+            width: 80%;
+            float: left;
+            border: 1px solid #69C9EC;
+            margin-top: -420px;
+            margin-left: 5%;
+        }
+        .font3 {
+            font-family: "微软雅黑";
+            font-size: 12px;
+            color: #7a96a0;
+        }
+        #sousuo {
+            height: 40px;
+            width: 60%;
+            background-color: #DDEEF4;
+            border-radius: 10px 10px 10px 10px;
+            border: 1px solid #7ec0c1;
+            text-indent: 3mm;
+            margin-left: 15%;
+            background-color: #eef7fa;
+        }
+        #div1 #cx {
+            margin-top: 10px;
+            margin-right: auto;
+            margin-left: auto;
+        }
+        #div1 div #anss {
+            float: right;
+            margin-top: -34px;
+            margin-right: 18%;
+        }
+        #anss:hover{
+        alpha(opacity=50);-moz-opacity:0.5;-khtml-opacity: 0.5; opacity: 0.5;cursor:pointer;
+        }
+    </style>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script type="text/javascript" language="javascript">
+        function iFrameHeight1() {
+            var ifm= document.getElementById("iframepage1");
+            var subWeb = document.frames ? document.frames["iframepage1"].document : ifm.contentDocument;
+            if(ifm != null && subWeb != null) {
+                ifm.height = subWeb.body.scrollHeight;
+            }
+        }
+        function emp(oInput){
+            if(oInput.eflag!=true){
+                oInput.value="";
+                oInput.eflag=true;
+            }
+        }
+        function find(){
+            var value = $('#sousuo').val().trim();
+            if(value!=""){
+                var address = '/stockQuery/index?code='+value;
+                console.log(address)
+                $('#iframepage1').attr('src',address);
+            }else{
+                alert("请输入资产名称或钱包地址!");
+            }
+
+        }
+        $(function(){
+            $("#sousuo").keydown(function(e){
+                var e = e || event,
+                        keycode = e.which || e.keyCode;
+                if (keycode==13) {
+                    find();
+                }
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+
+<div id="div1">
+    <div id="div2" style="margin-top: 20px;">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                <td bgcolor="#c2e1eb" >&nbsp;&nbsp;&nbsp;<span class="font5">股权查询</span></td>
+                <td width="52" bgcolor="#c2e1eb"><img src="/img/dj.png" width="51" height="42" /></td>
+            </tr>
+        </table>
+    </div>
+    <div id="cx">
+        <input type="text" style="margin-top: 10px" name="codeordz" id="sousuo" placeholder="请输入资产代码或钱包地址" value="" onclick="emp(this)" />
+    </div>
+    <div>
+        <img src="/img/ss.png" name="anss" width="30" height="29" id="anss" onclick="find()" /></div>
+    <div id="iframe2" style="height:650px;margin-top:30px">
+        <iframe src="" frameborder="0"  id="iframepage1" scrolling="no" name="iframepage1" width="100%" onLoad="iFrameHeight1()" scrolling="auto">
+        </iframe>
+    </div>
+</div>
+
+
+</div>
+
+
+</body>
+</html>

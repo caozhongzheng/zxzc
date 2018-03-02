@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>资产创设置列表</title>
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+        }
+        #div1 #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: auto;
+            background-color: #ddeef4;
+
+        }
+        .div4 {
+            height: 61px;
+            background-color: #69c9ec;
+            width: auto;
+            margin-left: 36px;
+            margin-right: 36px;
+            border-radius: 5px 5px 0px 0px;
+            box-shadow:0px 0px 3px lightgray;
+        }
+        .div5 {
+            height: auto;
+            margin-right: 36px;
+            margin-left: 36px;
+            background-color: #FFF;
+            border-radius: 0px 0px 5px 5px;
+            box-shadow: 0px 0px 3px lightgray;
+        }
+        .td_bk {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+            text-indent: 3%;
+            border: 1px solid #DDEEF4;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+<div id="div1">
+    <div id="div2" style="margin-top: 20px"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                <td bgcolor="#c2e1eb" class="font1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资产扩容</td>
+                <td width="52" bgcolor="#c2e1eb"><img src="/img/kr.png" width="51" height="42" /></td>
+            </tr>
+        </table>
+    </div>
+    <% data.forEach(function (trans) { %>
+    <div id="div3">
+        <div class="div4" id="div4" style="	margin-top: 60px;"><table width="100%"  height="61px" border="0" align="center" cellpadding="0" cellspacing="0"  >
+                <tr>
+                    <td width="25">&nbsp;</td>
+                    <td width="32"><img src="/img/fh1.png" width="32" height="32" /></td>
+                    <td width="18">&nbsp;</td>
+                    <td class="font1"><%=trans.currency%>&nbsp;&nbsp;<%=trans.currencyNme%> </td>
+                    <td width="40" align="center" class="font1"><img src="/img/sj.png" width="21" height="21" /></td>
+                    <td width="250" align="left" class="font2">创设时间：<%=trans.time%></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div5" id="div5">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0" style="">
+                <tr>
+                    <td width="3%" rowspan="2" valign="bottom">&nbsp;</td>
+
+                    <td rowspan="2" valign="top" class="font2"  ><div style="margin-top:50px"><p >扩容金额：<%=trans.money%>¥</p>
+                            <p>扩容价格:<%=trans.price%>众享币/份</p>
+                    <td width="2%" rowspan="2" valign="bottom" class="font2">&nbsp;</td>
+
+                    <td rowspan="2" valign="top"><div style="margin-top:50px"><p><span class="font2">扩容份数:<%=trans.addAssets%>份 </span></p>
+    
+                            <p><span class="font2">扩容轮次：<%=trans.krlc%></span></p></div></td>
+                    <td width="2%" rowspan="2" valign="top" ><img src="/img/xian.png" width="2" height="162" style="margin-top:10px" /></td>
+                    <td height="60" valign="bottom" class="font2">扩容份额分配</td>
+                    <td width="2%" rowspan="2" valign="bottom">&nbsp;</td>
+                </tr>
+                <tr>
+                    <td valign="middle">
+                        <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="td_bk">
+                            <% var leftMoney = parseInt(trans.addAssets)%>
+                            <% for(var i = 0;i<trans.asset.length;i++){%>
+                            <% if(trans.asset[i] != ''){%>
+                            <% leftMoney-= parseInt(trans.asset[i])%>
+                            <tr>
+                                <td height="25" align="left" class="td_bk"><%=trans.asset[i]%>份 分配给  <%=trans.address[i]%></td>
+                            </tr>
+                            <%}%>
+                            <%}%>
+                            <tr>
+                                <% var rate = parseInt(trans.rate*1000)%>
+                                <td height="25" align="left" class="td_bk">剩余<%=leftMoney%>份按1000  股配 <%=rate%></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <%})%>
+    <br /><br />
+</div>
+</div>
+</body>
+</html>

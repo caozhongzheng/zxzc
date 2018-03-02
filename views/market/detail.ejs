@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <link href="/css/bootstrap/bootstrap.css" rel="stylesheet">
+    <script src="/js/bootstrap/bootstrap.js"></script>
+    <script src="/js/jquery-form.js"></script>
+    <script src="//apps.bdimg.com/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+            background-color: #CCE5EC;
+
+        }
+        .an1 {
+            background-color: #69c9ec;
+            height: 43px;
+            width: 180px;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            border-radius: 5px;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            margin-top: 40px;
+            margin-left: 20%;
+        }
+        .an1:hover{background-color:#91d7f0;
+            cursor:pointer;}
+        #div1 #div3 {
+            background-color: #ddeef4;
+            height: 430px;
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+            line-height: 20px;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #fff;
+            float: right;
+            margin-top: 11px;
+            margin-right: 23px;
+        }
+
+        .font5 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+        }
+        #div1 #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: auto;
+            background-color: #ddeef4;
+            height: 480px;
+        }
+
+
+        #div1 #zuo {
+            width: 30%;
+            float: left;
+            margin-left: 5%;
+        }
+        #div1 #zuo #tou {
+            margin-top: 50px;
+            margin-left: 20%;
+            font-family: "微软雅黑";
+            font-size: 16px;
+            font-weight: bold;
+        }
+        #div1 #zuo #jiage {
+            height: 77px;
+            width: 90px;
+            text-align: center;
+            margin-top: 30px;
+            border: 2px solid #C2E1EB;
+            float: left;
+            margin-left: 10%;
+        }
+        .font_jg {
+            font-family: "微软雅黑";
+            font-size: 20px;
+            font-weight: bold;
+        }
+        #div1 #zuo #maidan {
+            float: left;
+            margin-top: 45px;
+            margin-left: 8%;
+        }
+        #div1 #zhong {
+            width: 2px;
+            float: left;
+            border-left-width: 1px;
+            border-left-style: dashed;
+            border-left-color: #C2E1EB;
+            height: 300px;
+            margin-top: 50px;
+            margin-left: 10px;
+        }
+        #div1 #you {
+            float: right;
+            width: 65%;
+            margin-top: -310px;
+        }
+        li {
+            text-decoration: none;
+            display: inline;
+        }
+        #div1 #you #dw {
+            width: 30%;
+            float: left;
+            text-align: center;
+        }
+        #div1 #you ul #jg {
+            float: left;
+            width: 30%;
+        }
+        #div1 #you ul #fs {
+            float: left;
+            width: 40%;
+            margin-bottom: 20px;
+        }
+
+        #div3 {
+            height: 400px;
+            width: 80%;
+            float: left;
+            border: 1px solid #69C9EC;
+            margin-top: -420px;
+            margin-left: 5%;
+        }
+        .font3 {
+            font-family: "微软雅黑";
+            font-size: 12px;
+            color: #7a96a0;
+        }
+
+        input {
+            height: 40px;
+            width: 80%;
+            border: 1px solid #c8e1e6;
+            border-radius: 4px 4px 4px 4px;
+            text-indent: 3mm;
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script type="text/javascript">
+        function checkaccount(){
+
+            // return false;
+            var price=$('#price').val();
+            var value=$("#value").val();
+
+            if(price==""||value==""){
+                alert("请填写完整交易信息!");
+                return false;
+            }
+            return true;
+
+        }
+
+        $(function (){
+            $("#myModal").draggable({
+                handle: ".modal-header",
+                cursor: 'move',
+                refreshPositions: false
+            });
+        });
+
+        $('#form1').ajaxForm(function(result){
+            //$('#myModal').modal('show');
+            alert(result);
+            $('#myModal').modal('hide')
+        })
+
+
+        function dealassetin(){
+            $('#form1').attr('action','/market/buy');
+            $('#myModal').modal('show');
+            //window.location.href='';
+        }
+        function dealassetout(){
+            $('#form1').attr('action','/market/sell');
+            $('#myModal').modal('show');
+            //window.location.href='';
+        }
+        function okey(){
+            //$('#myModal').modal('hide')
+        }
+    </script>
+    <div id="div1" style="margin-top: 20px">
+        <div id="div2"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                    <td bgcolor="#c2e1eb" >&nbsp;&nbsp;&nbsp;<span class="font5">资产交易</span></td>
+                    <td width="52" bgcolor="#c2e1eb"><img src="/img/dj.png" width="51" height="42" /></td>
+                </tr>
+            </table>
+        </div>
+        <div id="zuo">
+            <div id="tou"><%=data.currency%>  <%=data.name%></div>
+            <div id="jiage"><span class="font_jg"><%=data.price.toFixed(2)%></span><br />
+                <span class="font2">最新价</span>
+            </div>
+            <div class="font2" id="maidan">买单:<%=data.buysum.toFixed(2)%><br />
+                卖单:<%=data.sellsum.toFixed(2)%>
+            </div>
+            <input name="mr" type="button" class="an1" onclick = "dealassetin()" value="买&nbsp;&nbsp;入" />
+            <%if(data.isHave){%>
+            <input name="mc" type="button" id="maichu" class="an1" onclick = "dealassetout('')" value="卖&nbsp;&nbsp;出" />
+            <%}else{%>
+            <input name="mc" type="button" id="maichu" style="background-color: #cccccc" class="an1" disabled="true" onclick = "dealassetout('')" value="卖&nbsp;&nbsp;出" />
+            <%}%>
+        </div>
+        <div id="zhong"></div>
+        <div id="you">
+
+
+            <ul>
+                <li class="font2" style="line-height:25px" id="dw"><span class="font3">档位</span><br />
+                    卖五<br />
+                    卖四<br />
+                    卖三<br />
+                    卖二<br />
+                    卖一</li>
+                <li class="font2" style="line-height:25px" id="jg"><span class="font3">价格</span><br />
+                    <%=data.sell[4].price %><br />
+                    <%=data.sell[3].price %><br />
+                    <%=data.sell[2].price %><br />
+                    <%=data.sell[1].price %><br />
+                    <%=data.sell[0].price %>
+                </li>
+                <li class="font2" style="line-height:25px" id="fs"><span class="font3">份数</span><br />
+                    <%=data.sell[4].value %><br />
+                    <%=data.sell[3].value %><br />
+                    <%=data.sell[2].value %><br />
+                    <%=data.sell[1].value %><br />
+                    <%=data.sell[0].value %>
+                </li>
+            </ul>
+
+            <ul>
+                <li class="font2" style="line-height:25px" id="dw">
+                    买一<br />
+                    买二<br />
+                    买三<br />
+                    买四<br />
+                    买五</li>
+                <li class="font2" style="line-height:25px" id="jg">
+                    <%=data.buy[0].price %><br />
+                    <%=data.buy[1].price %><br />
+                    <%=data.buy[2].price %><br />
+                    <%=data.buy[3].price %><br />
+                    <%=data.buy[4].price %>
+                <li class="font2" style="line-height:25px" id="fs">
+                    <%=data.buy[0].value %><br />
+                    <%=data.buy[1].value %><br />
+                    <%=data.buy[2].value %><br />
+                    <%=data.buy[3].value %><br />
+                    <%=data.buy[4].value %>
+            </ul>
+        </div>
+    </div>
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" draggable="true" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-show="false"
+         aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 10%">
+        <div class="modal-dialog" style="border-radius: 5px;width: 350px; height: 280px">
+            <div class="modal-content" style="border-radius: 5px;">
+                <div class="modal-header" style=" border-radius: 5px">
+                    <button type="button" class="close"
+                            data-dismiss="modal" aria-hidden="true">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        资产交易
+                    </h4>
+                </div>
+                <form id="form1" action="" method="post" onsubmit="return checkaccount()">
+                    <input type="text" name="currency" style="display:none" value="<%=data.currency%>"/>
+                    <input type="text" name="counterparty" style="display:none" value="<%=data.counterparty%>"/>
+                    <div class="modal-body" >
+                        <div class="font5" style="text-align: center"><%=data.currency%>  <%=data.name%></div>
+                        <div style="margin-top: 15px; margin-bottom: 15px;">
+                            价格：<input type="text" id="price" name="price" />
+                        </div>
+                        <div style=" ">
+                            数量：<input type="text" id="value" name="value"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-default" style="width: 100px;background-color: #69c9ec; border-width: 0px;border-radius: 15px;color: #ffffff"
+                                onclick="okey()">确定
+                        </button>
+                    </div>
+                </form>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+    </body>
+</html>

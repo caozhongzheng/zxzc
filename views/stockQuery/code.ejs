@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="chrome=IE8">
+<!-- <script src="js/fishcomponent.js"></script> -->
+<title>My Demo 1</title>
+<style type="text/css">
+  img {
+    width:30px;
+    height: 29px;
+  }
+  .down {
+    width:100px;
+    height:auto;
+    float:left;
+    display:inline
+  }
+  .table tr:nth-child(odd) td  {
+    background-color: #E2F1EA;
+  }
+  .font1 {
+    font-family: "微软雅黑";
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+  }
+  .center {
+    width: 600px;
+    height: 620px;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    margin-top: 20px;
+    margin-left: 130px;
+  }
+  .table > thead > tr > th, .table > thead > tr > td, .table > tbody > tr > td {
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    line-height: 1.42857;
+    height:30px;
+  }
+</style>
+  <script src="/js/jquery-2.2.3.min.js"></script>
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+  <script>
+     function detail(val){
+        var address = $(val).children().first().next().text();
+        var code = $('#code1').text();
+        console.log(code)
+        window.location.href = '/stockQuery/index?code='+code+'&address='+address
+     }
+  </script>
+</head>
+<body >
+<div class="center">
+  <table>
+    <tr>
+      <!-- <td><a href="/stockQuery/index?code=<%=name%>" style="text-decoration:none;">返回</a></td> -->
+    </tr>
+  </table>
+  <br>
+  <br>
+  <span style="display:none" id="code1"><%=name%></span>
+  <table class="table" style="width:600px;" border="0"  cellpadding="2" cellspacing="0">
+    <thead>
+      <tr >
+        <th>资产名称</th>
+        <th>资产发行方地址</th>
+        <th>发行数量</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% result.forEach(function(rs){ %>
+    <tr onclick="detail(this)">
+      <td align="center"><%=rs.name%></td><td><%=rs.counterparty%></td><td><%=rs.value%></td>
+    </tr>
+    <% })%>
+    </tbody>
+
+  </table>
+</div>
+
+</body>
+</html>

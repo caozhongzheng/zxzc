@@ -1,0 +1,46 @@
+body{min-width: 1021px;min-height: 681px;}
+body{font-family:Microsoft YaHei}
+a{text-decoration:none;}
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+a:active{text-decoration:none;}
+.top{height: 165px;background-color: #3ca1c5}
+.imgDiv{margin-top: 17px;margin-left: 30px}
+.logoImg{height: 100%;float: left;}
+.welcomeDiv{line-height: 165px}
+.foot{background-color: #ddeef4;}
+.fromLoginDiv{border: 1px solid #a5b9be;width: 551px;height: 457px;border-radius: 5px;background-color: white;}
+.radioDiv{padding-left: 28px;padding-top: 38px;padding-right: 28px}
+.userRadio{margin-left: 3px}
+.personalUser{margin-left: 18px}
+.registerUser{margin-left: 229px;color: #96AAAF;}
+.accountsLogin{padding-top: 80px;text-align: center}
+.accountsLogin a{color: #3ca1c5;font-size: 14px}
+.createAccounts{padding-top: 57px;text-align: center}
+.createAccounts button{width: 277px;height: 42px;background-color: #68c9ec}
+.version{padding-top: 100px;text-align: center}
+.version span{font-size: 12px;color: #96AAAF;}
+.version hr{margin-top: 0px}
+.loginDiv{margin-left: 74px;margin-right: 74px}
+.fileAddress{margin-top: 82px;text-align: center;}
+.fileAddress input{width: 356px;height: 31px;margin-left: 20px}
+.loginPswdDiv{margin-top: 42px;text-align: center;}
+.loginPswdDiv input{width: 356px;height: 31px;margin-left: 23px}
+.loginBtnDiv{margin-top: 40px;margin-left: 80px}
+.loginBtnDiv button{width: 163px;height: 37px;background-color: #68c9ec;margin-left: 132px}
+.pswLoginDiv{margin-top: 70px;margin-left: 105px}
+.form-group input{height: 33px;width: 335px}
+.pswLoginDiv button{background-color: #68c9ec;margin-top: 75px;width: 165px;height: 40px;margin-left: 85px}
+.fromRegisterDiv{height: 595px;width: 551px;border-radius: 5px;background-color: white;border: 1px solid #a5b9be;}
+.fromRegisterDiv .registerTitle{margin-top: 40px;margin-left: 26px;margin-bottom: 26px}
+.fromRegisterDiv .registerTitle a{margin-right: 30px}
+.company,.personal{color: #2aabd2}
+.personal:hover{color:#f98068;border-bottom:3px solid #f98068}
+.company:hover{color:#f98068;border-bottom:3px solid #f98068}
+.companyDiv,.personalDiv{margin-left: 106px}
+.personalDiv form .form-group{margin-top: 20px}
+.companyDiv form .form-group{margin-top: 20px}
+.fromRegisterDiv button{width: 180px;height: 42px;background-color: #3ca1c5;margin-left: 76px;margin-top: 54px}
+.signColor{color: #f98068;float: left}
+.signMust{color: #f98068;}

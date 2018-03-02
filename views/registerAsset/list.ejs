@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+
+        }
+        .font4 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #000;
+            font-weight: bold;
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #fff;
+        }
+        #div1 #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: auto;
+            background-color: #ddeef4;
+
+        }
+        .div4 {
+            height: 61px;
+            background-color: #69c9ec;
+            width: auto;
+            margin-left: 36px;
+            margin-right: 36px;
+            border-radius: 5px 5px 0px 0px;
+            box-shadow:0px 0px 3px lightgray;
+        }
+        .div5 {
+            height: 105px;
+            margin-right: 36px;
+            margin-left: 36px;
+            background-color: #FFF;
+            border-radius: 0px 0px 5px 5px;
+            box-shadow:0px 0px 3px lightgray
+        }
+        .TabbedPanelsTab {
+            position: relative;
+            background-color: #FFF;
+            list-style: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            cursor: pointer;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            width: 110px;
+            font-family: "微软雅黑";
+            font-size: 12px;
+            font-weight: bold;
+            display: inline;
+            text-align: left;
+            margin-right: 10px;
+        }
+        .TabbedPanelsTab:hover{
+            /*background-color: #FFFFFF;*/
+            color: #ed7c65;
+            border-bottom-width: 4px;
+            border-bottom-style: solid;
+            border-bottom-color: #ed7c65;
+        }
+        .TabbedPanelsTabSelected {
+            background-color: #FFFFFF;
+            color: #ed7c65;
+            border-bottom-width: 4px;
+            border-bottom-style: solid;
+            border-bottom-color: #ed7c65;
+        }
+
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+<script>
+    $(function(){
+        $(".TabbedPanelsTab").click(function(){
+            $(this).addClass("TabbedPanelsTabSelected").siblings().removeClass("TabbedPanelsTabSelected");
+            if($(this).text()=="登入记录"){
+                $('.zhuanru').show();
+                $('.zhuanchu').hide();
+            }else if($(this).text()=="登出记录"){
+                $('.zhuanru').hide();
+                $('.zhuanchu').show();
+            }else{
+                $('.zhuanru').show();
+                $('.zhuanchu').show();
+            };
+        });
+    })
+
+</script>
+<div id="div1">
+    <div id="div2" style="margin-top: 20px"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                <td bgcolor="#c2e1eb" class="font1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="font4">资产登记</span></td>
+                <td width="52" bgcolor="#c2e1eb"><img src="/img/dj.png" width="51" height="42" /></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <ul style="margin-top:30px">
+            <li class="TabbedPanelsTab TabbedPanelsTabSelected" style=" background-color: #ddeef4;" tabindex="0">登记记录</li>
+            <li class="TabbedPanelsTab" style=" background-color: #ddeef4;" tabindex="0">登入记录</li>
+            <li class="TabbedPanelsTab" style=" background-color: #ddeef4;" tabindex="0">登出记录</li>
+        </ul>
+    </div>
+    <% data.forEach(function (recordItem) { %>
+    <div id="TabbedPanels1" class="TabbedPanels" style="">
+        <%if (recordItem.type == 0) {%>
+        <div class="TabbedPanelsContentGroup zhuanru" >
+            <div class="TabbedPanelsContent">
+                <div class="div4" id="div4" style="	margin-top: 60px;"><table width="100%"  height="61px" border="0" align="center" cellpadding="0" cellspacing="0"  >
+                        <tr>
+                            <td width="25">&nbsp;</td>
+                            <td width="400" class="font1">钱包：<%=recordItem.address%></td>
+                            <td width="18">&nbsp;</td>
+                            <td width="150" class="font1">姓名：<%=recordItem.name%></td>
+                            <td width="20">&nbsp;</td>
+                            <td class="font1"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="div5" id="div5">
+                    <table width="100%" height="105px" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="60" align="right" valign="middle"><img src="/img/fh1.png" width="32" height="32" /></td>
+                            <td width="10" align="center" valign="middle">&nbsp;</td>
+                            <td width="307" height="60" valign="middle" class="font4"><%=recordItem.currency%>&nbsp;&nbsp;&nbsp;<%=recordItem.currencyName%></td>
+                            <td width="20" valign="middle">&nbsp;</td>
+                            <td width="227" valign="middle" class="font2">登记份数：<%=recordItem.value%>份</td>
+                            <td width="21" align="right" valign="middle"><img src="/img/time.png" width="21" height="21" /></td>
+                            <td width="10" align="center" valign="middle">&nbsp;</td>
+                            <td width="243" valign="middle" class="font2">创设时间：<%=recordItem.time%></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <%}%>
+        <%if (recordItem.type == 1) {%>
+        <div class="TabbedPanelsContentGroup zhuanchu">
+            <div class="TabbedPanelsContent">
+                <div class="div4" id="div4" style="	margin-top: 60px;"><table width="100%"  height="61px" border="0" align="center" cellpadding="0" cellspacing="0"  >
+                        <tr>
+                            <td width="25">&nbsp;</td>
+                            <td width="400" class="font1">钱包：<%=recordItem.address%></td>
+                            <td width="18">&nbsp;</td>
+                            <td width="150" class="font1">姓名：<%=recordItem.name%></td>
+                            <td width="20">&nbsp;</td>
+                            <td class="font1"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="div5" id="div5">
+                    <table width="100%" height="105px" border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td width="60" align="right" valign="middle"><img src="/img/fh1.png" width="32" height="32" /></td>
+                            <td width="10" align="center" valign="middle">&nbsp;</td>
+                            <td width="307" height="60" valign="middle" class="font4"><%=recordItem.currency%>&nbsp;&nbsp;&nbsp;<%=recordItem.currencyName%></td>
+                            <td width="20" valign="middle">&nbsp;</td>
+                            <td width="227" valign="middle" class="font2">登记份数：<%=recordItem.value%>份</td>
+                            <td width="21" align="right" valign="middle"><img src="/img/time.png" width="21" height="21" /></td>
+                            <td width="10" align="center" valign="middle">&nbsp;</td>
+                            <td width="243" valign="middle" class="font2">创设时间：<%=recordItem.time%></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <%}%>
+        <%})%>
+        <br>
+        <br>
+
+    </div>
+</body>
+</html>

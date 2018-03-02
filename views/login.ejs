@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>众享资产管理平台</title>
+<link href="css/lcss/login.css" type="text/css" rel="stylesheet"/>
+<script src="js/jquery-2.2.3.min.js"></script>
+<script src="js/jquery-form.js"></script>
+<style>
+    a:focus {outline:none;/* FF,ie8,chomem */}
+    a{
+        text-decoration:none;
+    }
+</style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+  <script type="text/javascript">
+
+        function register()
+        { 
+            window.location.href='register';               
+        }
+        function localAccount(){
+          window.location.href='loginSecond';
+        }
+        function sclocal()
+        {
+            window.location.href='loginRecreate';
+        }
+
+
+        /*$('#form1').ajaxForm(function(result){
+            if(result=="账号或密码错误，请重新输入!"){
+                var check = $('#passwordCheck_label');
+                check.css({color:"red"});
+                check.html(result);
+                $('#password').val("");
+            }else{
+                window.location.href='login';
+            }
+
+
+        })*/
+
+        function checkaccount(){
+            var filename = $("#file").val();
+            var password = $("#password").val();
+            if(filename==""){
+                alert("请选择用户钱包！");
+                return false;
+            }else  if(password==""){
+                alert("密码不能为空！");
+                return false;
+            }
+
+            return true;
+
+
+        }
+      function checkRegisterInfo(){
+          var check = $('#passwordCheck_label');
+          check.html('');
+      }
+    </script>
+<body>
+<div id="tou">
+  <div id="logo"><img src="img/logo_0.png" width="80%" height="80%" /></div>
+  <div id="welc">welcome to peersafe asset management platform</div>
+  <div id="dlk">
+      <div style="padding-top: 30px; padding-bottom: 10px;">
+          <a href="javascript:void(0);" style="padding-left: 80%" class="font2" onclick="register()">注册新用户</a></div>
+          <!--<span style="padding-left: 80%" class="font2" onclick="register()"></span></div>-->
+      <hr />
+      <form id="form1" name="form1" method="post" action="/login" onsubmit="return checkaccount()" enctype="multipart/form-data">
+
+          <div class="div_bd" id="div_dm"><span class="font1">选择本地账户文件</span>
+              <br />
+              <br style="line-height:12px" />
+              <input type="file" id="file" name="file" class="bd" onfocus="checkRegisterInfo()" multiple>
+          </div>
+          <div class="div_bd" id="div_dm"><span class="font1">登录密码</span>&nbsp&nbsp<span id="passwordCheck_label" style="font-size: 14px;color:red"><%=msg%></span>
+              <br />
+              <br style="line-height:12px" />
+              <label for="zcmc"></label>
+              <input name="password" id="password" type="password" class="bd" id="zcmc" onfocus="checkRegisterInfo()" value=""/>
+          </div>
+
+          <div style=" margin-top: 50px;">
+              <div  style="float: left;margin-top: 10px; margin-left: 70px;" onclick="sclocal()"><a href="javascript:void(0);"class="font3">找回账号文件</a></div>
+              <input style="float: right;margin-right: 50px;"  type="submit" class="an1" value="登陆" />
+          </div>
+      </form>
+
+  </div>
+
+</div>
+</body>
+</html>

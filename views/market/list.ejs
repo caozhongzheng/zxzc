@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+
+        }
+        .font4 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #000;
+            font-weight: bold;
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            color: #fff;
+            line-height: 0px;
+            float: left;
+            margin-top: -10px;
+            margin-left: 50px;
+        }
+        #div1 #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: auto;
+            background-color: #ddeef4;
+
+        }
+        .div4 {
+            height: 70px;
+            background-color: #E4E4E4;
+            width: auto;
+            margin-left: 36px;
+            margin-right: 36px;
+            border-radius: 5px 5px 0px 0px;
+            box-shadow: 0px 0px 3px lightgray;
+        }
+        #div1 #div2 ul {
+        }
+        .div5 {
+            height: 70px;
+            margin-right: 36px;
+            margin-left: 36px;
+            background-color: #E4E4E4;
+            border-radius: 0px 0px 5px 5px;
+            box-shadow: 0px 0px 3px lightgray
+        }
+        .bg{
+            margin-top: 20px;
+        }
+        .fontimg{
+            color: #333333;
+            font-family: "Arial Normal","Arial";
+            font-size: 13px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            text-align: center;
+        }
+        .TabbedPanelsTab {
+            position: relative;
+            background-color: #FFF;
+            list-style: none;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            cursor: pointer;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            width: 110px;
+            font-family: "微软雅黑";
+            font-size: 12px;
+            font-weight: bold;
+            display: inline;
+            text-align: left;
+            margin-right: 10px;
+        }
+        .TabbedPanelsTab:hover{
+            /*background-color: #FFFFFF;*/
+            color: #ed7c65;
+            border-bottom-width: 4px;
+            border-bottom-style: solid;
+            border-bottom-color: #ed7c65;
+        }
+        .TabbedPanelsTabSelected {
+            background-color: #FFFFFF;
+            color: #ed7c65;
+            border-bottom-width: 4px;
+            border-bottom-style: solid;
+            border-bottom-color: #ed7c65;
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+<script>
+    $(function(){
+        $(".TabbedPanelsTab").click(function(){
+            $(this).addClass("TabbedPanelsTabSelected").siblings().removeClass("TabbedPanelsTabSelected");
+            if($(this).text()=="买入记录"){
+                $('.mairu').show();
+                $('.maichu').hide();
+            }else if($(this).text()=="卖出记录"){
+                $('.mairu').hide();
+                $('.maichu').show();
+            }else{
+                $('.mairu').show();
+                $('.maichu').show();
+            };
+        });
+    })
+</script>
+<div id="div1">
+    <div id="div2" style="margin-top: 20px"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                <td bgcolor="#c2e1eb">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="font4">成交记录</span></td>
+                <td width="52" bgcolor="#c2e1eb"><img src="/img/zyan.png" width="51" height="42" /></td>
+            </tr>
+        </table>
+    </div>
+    <div>
+        <ul style="margin-top:30px">
+            <li class="TabbedPanelsTab TabbedPanelsTabSelected" style=" background-color: #ddeef4;" tabindex="0">成交记录</li>
+            <li class="TabbedPanelsTab" style=" background-color: #ddeef4;" tabindex="0">卖出记录</li>
+            <li class="TabbedPanelsTab" style=" background-color: #ddeef4;" tabindex="0">买入记录</li>
+        </ul>
+    </div>
+    <% ordersrecords.forEach(function (ordersrecord) { %>
+    <% console.log(ordersrecord.direction)%>
+    <%if(ordersrecord.direction == "sell"){%>
+    <div id="TabbedPanels1" class="TabbedPanels maichu">
+        <!--<ul style="margin-top:50px">-->
+        <!--<li class="TabbedPanelsTab" tabindex="0">卖出记录</li>-->
+        <!--</ul>-->
+        <div class="TabbedPanelsContentGroup">
+            <div class="TabbedPanelsContent">
+                <div id="div3">
+                    <div class="div4" id="div4" >
+
+                        <table width="100%"  height="70" border="0" cellpadding="0" cellspacing="0" >
+                            <tr>
+                                <td width="20%"><span style="background-color: #66CCCC;padding: 10px ;padding-right: 20px"><img src="/img/u40.png"  /> <span class="" style="color: #fff;" >卖出</span></span></td>
+                                <!--<td class="fontimg"><p><span>☪</span></p></td>-->
+                                <td width="20%" align="left" class="font4"><%=ordersrecord.currency%>  <%=ordersrecord.currencyname%>  </td>
+                                <td width="5%" align="center"><img src="/img/time.png" width="21" height="21" /></td>
+                                <td width="" align="left">交易时间：<%=ordersrecord.timestamp%></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="div5" id="div5">
+                        <table width="100%" height="70" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="10%" align="left" valign="middle">&nbsp;</td>
+                                <td colspan="30%" align="left" valign="middle"width="30%" class="font2">卖出价格：<%=ordersrecord.price%> 众享币/份 </td>
+                                <td width="" align="left" valign="middle" class="font2">卖出份数：<%=ordersrecord.sum%>份</td>
+                                <!-- <td width="" align="left" valign="middle" class="font2">卖出后总份数：<%=ordersrecord.totalsum%>份</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+        </script>
+    </div>
+    <%}%>
+    <%if(ordersrecord.direction == "buy"){%>
+    <div id="TabbedPanels1" class="TabbedPanels mairu">
+        <!--<ul style="margin-top:50px">-->
+        <!--<li class="TabbedPanelsTab" tabindex="0">买入记录</li>-->
+        <!--</ul>-->
+        <div class="TabbedPanelsContentGroup">
+            <div class="TabbedPanelsContent">
+                <div id="div3">
+                    <div class="div4" id="div4" >
+
+                        <table width="100%"  height="70" border="0" cellpadding="0" cellspacing="0" class="bg">
+                            <tr>
+                                <td width="20%"><span style="background-color: #FF9933;padding: 10px ;padding-right: 20px"><img src="/img/u40.png"  /> <span class="" style="color: #fff;" >买入</span></span></td>
+                                <!--<td width="20%"class="div_bq" id="div_bq"style="float: left; background-color: #FF9933;width: 100px;padding-bottom: 10px; "><img src="img/u40.png" width="25" height="21" style="margin-left:15px; margin-top:10px" /> <span class="font1" >买入</span></td>-->
+                                <td width="20%" align="left" class="font4"><%=ordersrecord.currency%>  <%=ordersrecord.currencyname%></td>
+                                <td width="" align="center"><img src="/img/time.png" width="21" height="21" /></td>
+                                <td width="" align="left">交易时间：<%=ordersrecord.timestamp%></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="div5" id="div5">
+                        <table width="100%" height="70" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="10%" align="left" valign="middle">&nbsp;</td>
+                                <td colspan="30%" align="left" valign="middle"width="30%" class="font2">买入价格：<%=ordersrecord.price%> 众享币/份</td>
+                                <td width="" align="left" valign="middle" class="font2">买入份数：<%=ordersrecord.sum%>份</td>
+                                <!-- <td width="" align="left" valign="middle" class="font2"> 买入后总份数：<%=ordersrecord.totalsum%>份</td> -->
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript">
+            var TabbedPanels1 = new Spry.Widget.TabbedPanels("TabbedPanels1");
+        </script>
+    </div>
+    <%}%>
+    <%})%>
+    <br />
+    <br />
+</div>
+</body>
+</html>

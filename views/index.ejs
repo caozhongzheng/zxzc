@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>众享资产管理平台 - 登录成功</title>
+<head>
+  <% include head %>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+  <script>
+      function gohome() {
+          window.location.href = 'index';
+      }
+      function loginout(){
+          window.location.href = 'loginout';
+      }
+  </script>
+
+</head>
+
+<body style=" background-color: #CCE5EC;">
+
+<% include header %>
+
+<div id="neirong">
+  <div id="neirong1" class="leftmenu">
+
+    <ul>
+    <% if(userInfo.type == 'enterprise')  {%>
+      <li><img src="img/csjl.png">资产创设记录</li>
+      <li><img src="img/zcdj.png">资产登记记录</li>
+      <li><img src="img/krjl.png">资产扩容记录</li>
+    <%}%>
+      <li><img src="img/yjl.png">资产转移记录</li>
+      <li><img src="img/jyjl.png">资产交易记录</li>
+    </ul>
+  </div>
+  <div id="main">
+      <div id="userInfotype" style="display: none" ><%=userInfo.type%></div>
+      <div style="height:800px;width:80%;min-width:780px;margin-left:25px;" id="mcenter">
+              <iframe src="/account/index" frameborder="0"  id="iframepage" scrolling="no" name="iframepage" width="100%" onLoad="iFrameHeight()" >
+              </iframe>
+      </div>
+      <script type="text/javascript" language="javascript">
+          function iFrameHeight() {
+              var ifm= document.getElementById("iframepage");
+              var subWeb = document.frames ? document.frames["iframepage"].document : ifm.contentDocument;
+              if(ifm != null && subWeb != null) {
+                  ifm.height = subWeb.body.offsetHeight>100?subWeb.body.offsetHeight:subWeb.body.scrollHeight;
+              }
+          }
+      </script>
+  </div>
+</div>
+
+<% include footer %>
+
+</body>
+</html>

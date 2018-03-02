@@ -1,0 +1,122 @@
+<style>
+    .yincang{
+
+        visibility:hidden;
+    }
+
+    .nav > li > a:focus, .nav > li > a:hover {
+        background-color: #3DA1C5;
+        text-decoration: none;
+    }
+    .nav .open > a, .nav .open > a:focus, .nav .open > a:hover {
+        background-color: #3DA1C5;
+        border-color: #337ab7;
+    }
+    .dropdown-menu {
+        background-clip: padding-box;
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        border-radius: 4px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.176);
+        display: none;
+        float: left;
+        font-size: 14px;
+        left: 0;
+        list-style: outside none none;
+        margin: 0px 0 0;
+        min-width: 80px;
+        padding: 5px 0;
+        position: absolute;
+        text-align: left;
+        top: 90%;
+        z-index: 1000;
+    }
+    .navbar-nav > li > .dropdown-menu {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        margin-top: 0;
+    }
+    .dropdown-menu>li>a{
+        padding-left: 10px; padding-right: 10px;"
+    }
+    a:focus {outline:none;/* FF,ie8,chomem */}
+</style>
+ <script src="js/clipboard.min.js"></script>
+<div id="tou">
+    <div class="tou1"><img src="img/logo.png"/></div>
+    <div id="tou2" style="width:500px;margin-right: 0px">
+        <ul class="nav navbar-nav">
+            <li style="margin-top: 20px;"><span id="look" class="yincang foo" style="width: 280px;font-size: 14px; font-family: '微软雅黑';" value="<%=address%>"><%=address%></span></li>
+            <li><a href="#" style="margin-top: 5px;"><img src="img/yanjing-zc.png" class="look" data-clipboard-target="#look" aria-label="钱包地址已复制！" ></a></li>
+            <li><a href="#"><img src="img/shouye.png" onclick="gohome()"></a></li>
+            <!--<li><a href="#"><img src="img/shouye.png" ></a></li>-->
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding-left: 20px; right: 0px;"><img src="img/xiaoren.png"  ></a>
+                <ul class="dropdown-menu">
+                    <li><a href="#" id="xgxx" >修改资料</a></li>
+                    <hr style="margin-top: 1px; margin-bottom: 1px;"/>
+                    <li><a href="#" onclick="loginout()">退出登录 </a></li>
+
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+</div>
+<script>
+
+    $(function(){
+        var clipboard = new Clipboard('.look');
+
+        clipboard.on('success', function(e) {
+            var msg = e.trigger.getAttribute('aria-label');
+            alert(msg);
+            e.clearSelection();
+        });
+    } );
+
+//    function look(){
+//        var flag = $('#look').hasClass("yincang");
+//        if(flag){
+//            $('#look').removeClass("yincang");
+//        }else{
+//            $('#look').addClass("yincang");
+//        }
+//    }
+    $('.look').hover(
+            function(){
+                $(this).attr("src","img/yanjing-bh.png");
+                $('#look').removeClass("yincang");
+            },function(){
+                $(this).attr("src","img/yanjing-zc.png");
+                $('#look').addClass("yincang");
+            }
+    );
+</script>
+<div id="zhong">
+    <div id="zhong1">
+        <div id="fanhui"><img src="img/fanhui.png" onclick="gohome()" /></div>
+    </div>
+    <div id="zhong2">
+        <table>
+            <tr>
+                <td align="left" class="wdzh">
+                    <img src="img/an_wdzh.png" /></td>
+                <td>&nbsp;&nbsp;</td>
+                <% if(userInfo.type =='enterprise')  {%>
+                <td id="zccs"><img src="img/an_zccs.png" alt=""/></td>
+                <td>&nbsp;&nbsp;</td>
+                <td id="zcdj"><img src="img/an_zcdj.png" alt=""/></td>
+                <td>&nbsp;&nbsp;</td>
+                <td id="zckr"><img src="img/an_zckr.png"/></td>
+                <td>&nbsp;&nbsp;</td>
+                <% } %>
+                <td id="zczy"><img src="img/an_zczy.png"/></td>
+                <td>&nbsp;&nbsp;</td>
+                <td id="jysc"><img src="img/an_jysc.png"/></td>
+                <td>&nbsp;&nbsp;</td>
+                <td id="gqcx"><img src="img/an_gqcx.png"/></td>
+            </tr>
+        </table>
+    </div>
+</div>

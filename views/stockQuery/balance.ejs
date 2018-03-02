@@ -1,0 +1,22 @@
+ <div style="text-align: center">
+        <table style="margin-top:20px;width:739px;height:92px;background-color:#eff7fa;border:solid 1px #c8e1e6;min-width: 719px;"
+               class="xinxi3">
+            <% balances.forEach(function(balance){  %>
+            <%if ((balance.currency!="XRP")&&(balance.currency!="ZXC")) {%>
+            <tr>
+                <td style="width:300px">
+                    <div style="width:300px;overflow: hidden;white-space: nowrap; text-overflow: ellipsis;margin-left: 15px">
+                        <img src="/img/zcfh.png">&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span style="font-weight: bold;"><%=balance.currency%>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <span style="font-weight: bold;"><%=balance.currencyname%></span>
+                    </div>
+                </td>
+                <td style="width: 20px"><img src="/img/xvxian.png"></td>
+                <td style="width: 181px">总份数：<span style="color:#ed7c65;font-size:18px"><%=balance.value%></span>份</td>
+                
+                <td style="width: 181px">现价：<%=balance.price%>众享币/份</td>
+            </tr>
+            <%}%>
+            <% }) %>
+        </table>
+    </div>

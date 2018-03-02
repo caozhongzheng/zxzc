@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>众享资产管理平台 - 注册成功</title>
+    <link rel="stylesheet" href="css/lcss/register.css">
+    <link href="css/SpryTabbedPanels.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery-2.2.3.min.js"></script>
+    <script src="js/clipboard.min.js"></script>
+    <script src="js/SpryTabbedPanels.js" type="text/javascript"></script>
+    <style>
+        [id$=Check_label]
+        {
+            font-size:14px;
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<body>
+    <div id="tou">
+        <div id="logo">
+            <img src="img/logo.png" width="80%" height="80%" />
+        </div>
+        <div id="welc">welcome to peersafe asset management platform</div>
+        <div id="dlk">
+<div style="margin-right: auto;margin-left: auto; width: 631px;width:643px;padding-top: 30px" class="registerSuccess" style="margin-left: auto;margin-right: auto">
+    <div style="width: 483px;height: 117px;background-color: white;text-align: center;line-height: 117px;margin-left: 82px;margin-bottom: 20px">
+        <img src="img/duigou.png">
+        <% if(rec==='0'){%>
+        <span style="color:#f98068;font-size: 24px;font-weight: bold">恭喜您，注册成功！</span>
+        <%}else{%>
+        <span style="color:#f98068;font-size: 24px;font-weight: bold">恭喜您，钱包重新生成成功！</span>
+        <%}%>
+    </div>
+    <div style="font-size: 13px;color: #2d3d5b;margin-bottom: 20px;padding:10px">
+        请妥善保存自己的私钥，任何拥有该私钥的人可以取出你的钱，所以请将它保管在安全的地方<br>
+        钱包地址可通过私钥找回，系统不提供私钥找回功能。
+    </div>
+    <table style="height: 116px;padding: 2px;margin-left: 40px">
+        <tr style="margin-bottom: 20px">
+            <td style="margin-right: 10px">钱包地址:</td>
+            <td style="margin-right: 10px"><input type="text" class="addressInput" readonly="readonly" value="<%=account['address']%>" style="width: 482px;height: 22px;"></td>
+            <td style="margin-right: 10px"> </td>
+        </tr>
+        <tr>
+            <td style="margin-right: 10px">私 钥:</td>
+            <td style="margin-right: 10px"><input type="password" id="password" class="secretKeyInput foo" readonly="readonly" value="<%=account["secret"]%>"
+                       style="width: 482px;height: 22px;"></td>
+            <td style="margin-right: 10px"><img src="img/yanjing-zc.png" class="secretKey look"  data-clipboard-target="#password" aria-label="私钥已复制！"></td>
+        </tr>
+        <tr>
+            <td style="margin-right: 10px"></td>
+            <td style="margin-right: 10px;width: 200px;display:none" ><a href="/download"> <span id="doFile">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;下载保存钱包</span></a></td>
+            <td style="margin-right: 10px"></td>
+        </tr>
+    </table>
+
+    <div style="margin-top: 20px;margin-left: 241px;margin-bottom: 30px">
+        <input type="button" onclick="timedMsg()" id="home" style="margin-bottom: 30px" class="btn" value="  进入管理平台">
+
+        </input>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function() {
+       $('#doFile').click();
+    });
+    $(function(){
+        var clipboard = new Clipboard('.look');
+
+        clipboard.on('success', function(e) {
+            var msg = e.trigger.getAttribute('aria-label');
+            alert(msg);
+            e.clearSelection();
+        });
+    } );
+    function timedMsg()
+    {
+        setTimeout(function(){
+            window.location.href='login';
+        },1000);
+        
+    }
+</script>
+<script src="js/register/registerSecond.js"></script>
+</div>
+</div>
+</body>
+</html>

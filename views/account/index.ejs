@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/home/myaccount.js"></script>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body style="margin: 0px;">
+<div class="neirong4" style="min-width: 818px" >
+    <div style="padding-top: 20px;" class="xinxi1">
+        <div style="width:6px;height:42px;background-color:#f98068;float: left"></div>
+        <div style="width:753px;background-color:#c3e1ed;float: left">
+            <span style="margin-left:15px;font-weight:700;font-family:Microsoft YaHei;line-height:42px;">
+                 我的账户
+            </span>
+            <img src="/img/xiaob1.png" style="float: right">
+        </div>
+    </div>
+    <div style="margin-bottom: 79px;margin-top: 119px;" class="xinxi2">
+        <div style="float: left;margin-right: 110px;margin-top: 10px;">
+            <span style="font-size: 14px;margin-right: 35px">账户资产</span>
+            <% var ba=0 %>
+            <% if (balances && balances.length) { %>
+            <% balances.forEach(function (balance) { %>
+            <%    if (balance.currency=="ZXC") {%>
+            <%        ba=balance.value; }})}%>
+            <span style="font-size: 18px;font-weight: bold;">众享币：<%=ba %></span>
+            <span>元</span>
+        </div>
+        <div>
+            <button type="button" class="btn"
+                    style="background-color:#68c9ec;width:180px;height:43px;margin-right: 18px">提现
+            </button>
+            <button type="button" class="btn" style="background-color:#becd5c;width:180px;height:43px;">充值</button>
+        </div>
+    </div>
+    <hr style="border-color: #c8e1e6"/>
+
+    <style>
+        button::-moz-focus-inner{
+            border:0px;
+        }
+        .xinxi3 tbody tr td{
+            text-align:left;
+        }
+    </style>
+    <script>
+        function jszc(obj){
+            $(obj).attr("disabled","disabled").css("background-color","#DDDDDD");;
+            $(obj).text("资产接受中···");
+        }
+    </script>
+    <div style="text-align: center">
+        <table style="margin-bottom:8px;width:739px;background-color:#eff7fa;border:solid 1px #c8e1e6;min-width: 719px;"
+               class="xinxi3">
+            <% trustlines.forEach(function(trustline){  %>
+
+            <form action="/account/index" method="post">
+                <tr>
+                    <td style="width:60px">
+                        <div style="overflow: hidden;white-space: nowrap; text-overflow: ellipsis;margin-left: 15px">
+                            <img src="/img/zcfh.png">
+                        </div>
+                    </td>
+                    <td style="width:240px; padding-left: 40px;">
+                        <span style="font-weight: bold;padding-right: 10px;"><%=trustline.currency%></span>
+                        <span style="font-weight: bold;"><%=trustline.name%></span>
+                    </td>
+                    <td style="width: 20px"><img src="/img/xvxian.png"></td>
+                    <td style="width: 181px">总份数：
+                        <span style="color:#ed7c65;font-size:18px"><%=trustline.value%></span>份
+                        <input name="address" id="trustlineaddress" type="hidden" value=<%=trustline.issuer%> />
+                        <input name="code" type="hidden" value="<%=trustline.currency%>" />
+                        <input name="id" type="hidden" value="<%=trustline.id%>" />
+                    </td>
+                    <td>
+                        <button type="submit" class="btn"
+                                style="background-color:#68c9ec;width:180px;height:43px;margin-right: 18px">接受资产
+                        </button>
+                    </td>
+
+                </tr>
+            </form>
+            <% }) %>
+
+
+            <% balances.forEach(function(balance){  %>
+            <%if ((balance.currency!="XRP")&&(balance.currency!="ZXC")&&balance.value*1>0) {%>
+            <tr>
+                <td style="width:60px">
+                    <div style="overflow: hidden;white-space: nowrap; text-overflow: ellipsis;margin-left: 15px">
+                        <img src="/img/zcfh.png">
+                    </div>
+                </td>
+                <td style="width:240px; padding-left: 40px;">
+                    <span style="font-weight: bold;padding-right: 10px;"><%=balance.currency%></span>
+                    <span style="font-weight: bold;"><%=balance.name%></span>
+                </td>
+                <td style="width: 20px"><img src="/img/xvxian.png"></td>
+                <td style="width: 181px">总份数：<span style="color:#ed7c65;font-size:18px"><%=parseFloat(balance.value).toFixed(2)%></span>份</td>
+                <td style="width: 181px">现价：<%=parseFloat(balance.price).toFixed(2)%>众享币/份</td>
+            </tr>
+            <%}%>
+            <% }) %>
+        </table>
+    </div>
+
+    <div style="margin-top: 36px;padding-bottom: 45px;text-align: center">
+        <button type="button" style="width: 30px;height: 30px;" class="btn">1</button>
+    </div>
+</div>
+</body>
+</html>
+

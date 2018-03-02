@@ -1,0 +1,394 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <script src="/js/jquery-form.js"></script>
+    <link href="/css/bootstrap/bootstrap.css" rel="stylesheet">
+    <script src="/js/bootstrap/bootstrap.js"></script>
+
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+    <script language=javascript>
+        //        $(function(){
+        //           loaddata();
+        //        });
+        function checkaccount(){
+            // return false;
+
+            var qbdz=$("#qbdz").val();
+            var zcdm=$("#zcdm").val();
+            var zcmclist =$("#zcmclist").val();
+
+            var checklist = $("span[id$='Check_label']").text();
+            if(checklist!=""){
+                alert(checklist);
+                return false;
+            }else if(qbdz==""||zcdm==""){
+                alert("请完整填写信息!");
+                return false;
+            }else if(zcmclist==""||zcmclist==null){
+                var check = $("#zcmclistCheck_label");
+                check.html( "资产名称为空!");
+                check.css({color:"red"});
+                return false;
+            }
+            $("#submit").attr("disabled","disabled");
+            return true;
+        }
+        function tijiaodengdai(result){
+            setTimeout(function(){
+                if(result=="资产登记完成"){
+                    $('#imgchange').attr("src","/img/zhengque.png");
+                    $('#textchange').text("资产登记完成");
+                    $('#tjtext').text("提交成功，我们将在两个工作日内对提交内容进行审核。您可以在审核中查看提交.");
+                    $('#button').removeAttr("disabled");
+                    $('#button').val("资产登记完成");
+                }else{
+                    $('#imgchange').attr("src","/img/cuowu.png");
+                    $('#textchange').text("资产登记失败");
+                    $('#tjtext').text("提交失败，请查看数据是否填写正确，重新填写正确数据，完成资产登记。");
+                    $('#button').val("资产登记失败");
+                    $('#button').removeAttr("disabled");
+                }
+            },1000);
+        };
+
+        $('#form1').ajaxForm(function(result){
+            $('#myModal').modal('show');
+            tijiaodengdai(result);
+        })
+
+        function okey(){
+            var values = $('#button').val();
+            if(values=="资产登记完成"){
+                window.location.href="/registerAsset/index"
+            }else{
+                $('#imgchange').attr("src","/img/jiazaizhong-063.gif");
+                $('#textchange').text("正在提交...");
+                $('#tjtext').text("数据正在提交，请耐心等待。");
+                $('#submit').removeAttr("disabled");
+            }
+        }
+
+        function checkRegisterInfo(num){
+            var text;
+            var address = $('#look',window.parent.document).text();
+
+            switch (num) {
+                    //当点击提交按钮时校验必填项是否为空,防止直接点击提交按钮
+                case 0:
+
+                    //验证资产名称
+                case 1:
+                    text = $('#qbdz').val().trim();
+                    var check = $("#qbdzCheck_label");
+                    //验证是否为空
+                    if (text == "") {
+                        check.html("用户钱包地址不能为空!");
+                        check.css({color:"red"});
+                    }else if (text.length>34) {
+                        check.html( "用户钱包地址不超过34个字符!");
+                        check.css({color:"red"});
+
+                    }else if (text==address) {
+                        check.html( "不能给自己账户登记资产!");
+                        check.css({color:"red"});
+
+                    }else{
+                        check.html( "");
+                        if(text[0]=='r'&&text.length>20){
+                            $.get('/getUserInfo?address='+text,function(data){
+                                $('#zcdm').val(data);
+                            });
+                        }
+                    }
+                    break;
+
+                case 3:
+
+                case 4:
+
+                    text = $('#zcfe').val();
+
+                    var kdjfe = $('#zckfe').val();
+                    var check = $("#zcfeCheck_label");
+                    if (text == "") {
+                        check.css({color:"red"});
+                        check.html( "登记份额不能为空!");
+                    }
+
+                    else if(text.search(/^[0-9]+([.]{1}[0-9]+){0,1}$/) == -1){
+                        check.css({color:"red"});
+                        check.html("请输入有效的登记份额!");
+                    }else if(parseInt(text)>parseInt(kdjfe)){
+                        check.css({color:"red"});
+                        check.html("登记份额不能大于可登记份额!");
+                    }
+                    else{
+                        check.html( "");
+                    }
+                    break;
+            }
+        }
+    </script>
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+            background-color: #CCE5EC;
+
+        }
+        .bd {
+            height: 40px;
+            width: 75%;
+            border: 1px solid #CCC;
+            min-width: 530px;
+            color: #666;
+            text-indent: 3mm;
+            background-color: #eef7fa;
+        }
+        .div_bd {
+            width: auto;
+            margin-bottom: 18px;
+            text-align: left;
+            margin-left: 20%;
+        }
+        #div1 #div3 {
+            height: auto;
+            margin-top: 50px;
+            border-bottom-width: 1px;
+            border-bottom-style: ridge;
+            border-bottom-color: #c8e1e6;
+            margin-bottom: 40px;
+        }
+        .div_yema {
+            margin-top: 36px;
+            margin-right: auto;
+            margin-left: auto;
+            height: 100px;
+        }
+        .bdfh {
+            height: 40px;
+            width: 100%;
+            border: 1px solid #CCC;
+        }
+        button {
+            height: 43px;
+            width: 142px;
+            background-color: #69c9ec;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            border-radius: 5px;
+        }
+        button:hover{
+            background-color: #9adaf1;cursor:pointer;
+        }
+        .an_ym {
+            background-color: #a9c5d0;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+            border-radius: 3px;
+            height: 22px;
+        }
+        .an_ym:hover{
+            background-color: #6ac8ec;cursor:pointer;
+        }
+        .font4 {
+            font-family: "微软雅黑";
+            font-size: 18px;
+            color: #ed7c65;
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+        }
+        .an1 {
+            background-color: #69c9ec;
+            height: 43px;
+            width: 180px;
+            font-family: "微软雅黑";
+            font-size: 14px;
+            border-radius: 5px;
+            border-top-style: none;
+            border-right-style: none;
+            border-bottom-style: none;
+            border-left-style: none;
+        }
+        .an1:hover{background-color:#91d7f0;
+            cursor:pointer;}
+        .font3 {
+            font-family: "微软雅黑";
+            font-size: 18px;
+            font-weight: bold;
+            color: #2d3d5b;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+        }
+        #div1 #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: auto;
+            background-color: #ddeef4;
+
+        }
+
+        #div1 #div3 #an_tj {
+            margin-right: auto;
+            margin-left: auto;
+            width: 180px;
+            height: 120px;
+            margin-top: 50px;
+        }
+    </style>
+
+
+</head>
+<body>
+<div id="div1" style="margin-top:20px">
+    <div id="div2">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                <td bgcolor="#c2e1eb" class="font1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资产登记</td>
+                <td width="52" bgcolor="#c2e1eb"><img src="/img/dj.png" width="51" height="42" /></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        function selection(value){
+            var json = JSON.parse($('#test').text());
+            for(var i =0;i<json.length;i++){
+                var jsonobj = json[i];
+                if(jsonobj['address'] == value) {
+                    $('#zckfe').val(jsonobj['value']);
+                    $('#currency').val(jsonobj['code']);
+                    $('#currencyName').val(jsonobj['name']);
+                }
+            }
+        }
+    </script>
+    <div id="div3">
+        <form id="form1" action="index" method="post" onsubmit="return checkaccount()">
+            <div class="div_bd" id="div_mc"><span class="font2" name = "qbdz" >用户钱包地址*</span>&nbsp&nbsp<span id="qbdzCheck_label" style="font-size: 14px;"></span><br />
+                <br style="line-height:12px" />
+
+                <label for="qbdz"></label>
+                <input name="address" type="text" class="bd" id="qbdz" placeholder="不超过34个字符" value="" onblur="checkRegisterInfo(1)" list="url_list" autocomplete="off"/>
+                <datalist id="url_list">
+                    <%for(var it in friends){%>
+                    <option label="<%=friends[it]%>" value="<%=it%>"/>
+                    <%}%>
+                </datalist>
+
+            </div>
+            <div class="div_bd" id="div_dm"><span class="font2">用户姓名</span>&nbsp&nbsp<span id="zcdmCheck_label" style="font-size: 14px;"></span><br />
+                <br style="line-height:12px" />
+
+                <label for="zcdm"></label>
+                <input name="name" type="text" class="bd" id="zcdm" placeholder="用户姓名" readonly=""/>
+            </div>
+            <div class="div_bd" id="div_lc"><span class="font2" >资产代码/资产名称*</span>&nbsp&nbsp<span id="zcmclistCheck_label" style="font-size: 14px;"></span><br />
+                <br style="line-height:12px" />
+
+                <label for="cslc"></label>
+
+                <div id="test" style="display: none"><%=JSON.stringify(assets)%></div>
+                <select  name="counterparty" id="zcmclist" class="bd"  onchange="selection(this.value);"  >
+                    <% assets.forEach(function (asset) { %>
+                    <option value="<%=asset.address%>">&nbsp;&nbsp;<%=asset.code%>&nbsp;&nbsp;<%=asset.name%></option>
+                    <%})%>
+                </select>
+
+            </div>
+            <%if(assets[0]){%>
+            <input type="text" id="currency" name="currency" value="<%=assets[0].code%>" style="display:none">
+            <input type="text" id="currencyName" name="currencyName" value="<%=assets[0].name%>" style="display:none">
+            <%}%>
+            <div class="div_bd" id="div_fe"><span class="font2" >可登记份额*</span><br />
+                <br style="line-height:12px" />
+
+                <label for="zcmc"></label>
+                <%if(assets[0]){%>
+                <input  name='lastValue'type="text" class="bd" id="zckfe"  readonly="readonly" placeholder="份" value="<%=assets[0].value%>" >
+                <%}else{%>
+                <input  type="text" class="bd" id="zckfe"  readonly="readonly" placeholder="份" value="" >
+                <%}%>
+            </div>
+            <div class="div_bd" id="div_jg"><span class="font2" >登记份额*</span>&nbsp&nbsp<span id="zcfeCheck_label" style="font-size: 14px;"></span><br/>
+                <br style="line-height:12px" />
+
+                <label for="zcfe"></label>
+                <input name="value" type="text" class="bd" id="zcfe" placeholder="份" value="" onblur="checkRegisterInfo(4)"/>
+            </div>
+            <%if(msg){%>
+            <div class="div_bd" id="div_dm" style="margin-top:11px;">
+                <span class="font2" style="color: red"><%=msg%></span>
+            </div>
+            <%}%>
+            <div id="an_tj">
+                <input type="submit" id="submit" class="an1" value="提&nbsp;&nbsp;交" /></div>
+        </form>
+        <!--模态框（Modal）-->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="false" data-show="false"
+             aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 10%">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <table width="100%">
+                                <tr>
+                                    <td width="40%" align="right" style="padding-right: 20px">
+                                        <img id="imgchange" src="/img/jiazaizhong-063.gif" style="width: 50px;height: 50px" alt=""/>
+                                    </td>
+                                    <td id="textchange" width="60%" align="left" class="font3">正在提交...</td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div style="padding-left:50px">
+                            <p >
+                                <span id="tjtext" class="font2">数据正在提交，请耐心等待。</span>
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="button" type="button" class="btn btn-primary" data-dismiss="modal" onclick="okey()" disabled="true">
+                                确定
+                            </button>
+                        </div>
+                    </div>
+
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

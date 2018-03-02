@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>众享资产管理平台 - 登录</title>
+    <link rel="stylesheet" href="css/lcss/loginRecreate.css">
+    <script src="js/jquery-2.2.3.min.js"></script>
+
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+<script type="text/javascript">
+    function show_return()
+    {
+        window.location.href='login';
+    }
+    function login_submit()
+    {
+        window.location.href='index';
+    }
+    function register()
+    {
+        window.location.href='register';
+    }
+    function recreateAccount(){
+        $('#form1').submit();
+    }
+    function ajaxFileUpload(){
+        //loading();//动态加载小图标
+        var pass= $("#password").val();
+        $.ajaxFileUpload ({
+            url :'/upload?pass='+pass,
+            secureuri :false,
+            fileElementId :'fileToUpload',
+            dataType : 'json',
+            success : function (data, status){
+                if(typeof(data.error) != 'undefined'){
+                    if(data.error != ''){
+                        alert(data.error);
+                    }else{
+                        alert(data.msg);
+                    }
+                }
+            },
+            error: function (data, status, e){
+                alert(e);
+            }
+        })
+        return false;
+    }
+    function loading (){
+        $("#loading ").ajaxStart(function(){
+            $(this).show();
+        }).ajaxComplete(function(){
+            $(this).hide();
+        });
+    }
+   function checkaccount(){
+
+       var dlmmq1=$("#password1").val();
+       var dlmmq2=$("#password2").val();
+       var privatekey =$("#privatekey").val();
+
+       var checklist = $("span[id$='Check_label']").text();
+       if(dlmmq1==""||dlmmq2==""||privatekey==""){
+           alert("请完整填写信息!");
+           return false;
+       }else if(checklist!=""){
+           alert(checklist);
+           return false;
+       }
+       return true;
+   }
+
+    function checkRegisterInfo(num,obj){
+        var text = $(obj).val();
+        var check = $(obj).parent().children('span').eq(1);
+        check.html( "");
+
+
+        switch (num) {
+
+                //验证资产名称
+            case 0:
+                $('#szmm').val();
+                // 验证格式
+
+                if (text == "") {
+                    check.html("秘钥不能为空!");
+                    check.css({color:"red"});
+
+                } else{
+                    check.html( "");
+                }
+                break;
+            case 1:
+                $('#szmm').val();
+                // 验证格式
+
+                if (text == "") {
+                    check.html("密码不能为空!");
+                    check.css({color:"red"});
+
+                } else if (text.search(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,8}$/)) {
+                    check.html( "密码必须为8位字母和数字组合!");
+                    check.css({color:"red"});
+
+                }else{
+                    check.html( "");
+                }
+                break;
+            case 2:
+                $('#szmm1').val();
+                // 验证格式
+
+                if (text == "") {
+                    check.html("密码不能为空!");
+                    check.css({color:"red"});
+
+                }else if ( $('#szmm').val()!= $('#szmm2').val()) {
+                    check.html( "两次输入的密码不一致!");
+                    check.css({color:"red"});
+
+                }else if (text.search(/^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{8,8}$/)) {
+                    check.html( "密码必须为8位字母和数字组合!");
+                    check.css({color:"red"});
+
+                }else{
+                    check.html( "");
+                }
+                break;
+
+        }
+    }
+</script>
+
+<body>
+  <div id="tou">
+    <div id="logo">
+      <img src="img/logo.png" width="80%" height="80%" />
+    </div>
+    <div id="welc">welcome to peersafe asset management platform</div>
+    <div id="dlk"></div>
+
+    <div id="bt_2">
+      <span class="font1" style="color:#a7a7a7" onclick="register()">注册新用户</span>
+    </div>
+    <hr / style="margin-top:-415px">
+      <form id="form1" name="form1" method="post" action="/loginRecreate" onsubmit="return checkaccount()">
+        <div class="div_bd" id="div_dm" style="margin-top:30px">
+          <span class="font1">秘钥</span> <br /> <br style="line-height:12px" />
+          <label for="zcmc"></label>
+            <input name="privatekey" id="privatekey" class="bd" id="my" value="" value="" onblur="checkRegisterInfo(0,this)" />
+        </div>
+        <div class="div_bd" id="div_dm">
+          <span class="font1">设置登录密码</span>&nbsp&nbsp<span id="szmmCheck_label">密码必须为8位字母和数字组合</span> <br /> <br
+            style="line-height:12px" /> <label for="zcmc"></label>
+            <input name="password1" type="password" class="bd" id="password1" value="" onblur="checkRegisterInfo(1,this)" />
+        </div>
+        <div class="div_bd" id="div_dm">
+          <span class="font1">再次输入登录密码</span>&nbsp&nbsp<span id="szmm2Check_label"></span><br /> <br
+            style="line-height:12px" /> <label for="zcmc"></label>
+            <input name="password2" type="password" class="bd" id="password2" value="" onblur="checkRegisterInfo(2,this)"/>
+        </div>
+      </form>
+      <div id="fh">
+        <img id="fhwz1" src="img/fhjt.png" width="12" height="16" />
+        <a href="login" class="font3" id="fhwz">返回</a>
+      </div>
+    <div id="an"  style="margin-top: 20px;">
+      <input name="tj" type="button" class="an1" value="下一步" onclick="recreateAccount()"/>
+    </div>
+    <br /> <br /> <br />
+
+  </div>
+</body>
+
+
+</html>

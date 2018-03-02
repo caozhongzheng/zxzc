@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>无标题文档</title>
+    <script src="/js/jquery-2.2.3.min.js"></script>
+    <style type="text/css">
+        body {
+            height: auto;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            max-width:970px;
+            min-width:753px;
+
+        }
+        .font4 {
+            font-family: "微软雅黑";
+            font-size: 18px;
+            color: #ed7c65;
+        }
+        .font2 {
+            font-family: "微软雅黑";
+            font-size: 13px;
+            color: #2d3d5b;
+        }
+        .font1 {
+            font-family: "微软雅黑";
+            font-size: 14px;
+            font-weight: bold;
+            color: #000;
+        }
+        #div1 #div2 {
+            height: 42px;
+            width: auto;
+        }
+        #div1 {
+            width: auto;
+            background-color: #ddeef4;
+
+        }
+        .div4 {
+            height: 61px;
+            background-color: #69c9ec;
+            width: auto;
+            margin-left: 36px;
+            margin-right: 36px;
+            border-radius: 5px 5px 0px 0px;
+            box-shadow:0px 0px 3px lightgray;
+        }
+        .div5 {
+            height: 177px;
+            margin-right: 36px;
+            margin-left: 36px;
+            background-color: #FFF;
+            border-radius: 0px 0px 5px 5px;
+            box-shadow:0px 0px 3px lightgray
+        }
+    </style>
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?423d1e46a3f037d8c42e1b2853f3e69e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+        })();
+    </script>
+</head>
+
+<body>
+<div id="div1" >
+
+    <div id="div2" style="margin-top: 20px"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+            <tr>
+                <td width="6" bgcolor="#ed7c65">&nbsp;</td>
+                <td bgcolor="#c2e1eb" class="font1">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;资产创设</td>
+                <td width="52" bgcolor="#c2e1eb"><img src="/img/zccs.png" width="51" height="42" /></td>
+            </tr>
+        </table>
+    </div>
+
+    <% data.forEach(function (item) { %>
+    <div id="div3">
+
+        <div class="div4" id="div4" style="	margin-top: 60px;"><table width="100%"  height="61px" border="0" align="center" cellpadding="0" cellspacing="0"  >
+                <tr>
+                    <td width="25">&nbsp;</td>
+                    <td width="32"><img src="/img/fh1.png" width="32" height="32" /></td>
+                    <td width="18">&nbsp;</td>
+                    <td class="font1"><%=item.code%></td>
+                    <td class="font1">资产名称:<%=item.name%></td>
+                </tr>
+            </table>
+        </div>
+        <div class="div5" id="div5">
+            <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                    <td width="78" valign="bottom">&nbsp;</td>
+                    <td height="60" valign="bottom" class="font2">参考价格：<%=item.price%>众享币/份</td>
+                    <td width="64" valign="bottom">&nbsp;</td>
+                    <td valign="bottom" class="font2">总份数:<%=item.value%>份</td>
+                    <td width="64" valign="bottom">&nbsp;</td>
+                    <td valign="bottom" class="font2">资产轮次：<%=item.times%></td>
+                </tr>
+                <tr>
+                    <td height="60" colspan="6" valign="middle"><hr color="#c8e1e6" width="90%" /></td>
+                </tr>
+
+
+                <tr>
+                    <td colspan="6"><table width="100%" border="0" cellpadding="0" cellspacing="0">
+                            <tr>
+                                <td width="75" valign="top">&nbsp;</td>
+                                <td width="30" valign="top"><img src="/img/time.png" width="21" height="21" /></td>
+                                <td height="60" valign="top" class="font2">创设时间：<%=item.time%></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <%})%>
+    <br>
+    <br>
+
+</div>
+</body>
+</html>
